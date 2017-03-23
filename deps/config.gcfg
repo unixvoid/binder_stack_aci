@@ -1,0 +1,11 @@
+[binder]
+	port			= 8000
+	loglevel		= "debug"
+	secdictionary 		= "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+	sectokensize		= 25
+	filedirectory		= "uploads/"
+	bootstrap		= true
+	delay			= 1
+[redis]
+	host			= "127.0.0.1:6379"
+	password		= ""
