@@ -1,0 +1,12 @@
+[Unit]
+Description=binder
+
+[Service]
+ExecStart=/usr/bin/rkt run \
+	--net=host \
+        --volume data,kind=host,source=/binder/binderdata/ \
+        --volume redis,kind=host,source=/binder/redisdata/ \
+        unixvoid.com/binder
+
+[Install]
+WantedBy=multi-user.target

@@ -1,3 +1,4 @@
+OS_PERMS=sudo
 BINDER_BIN=https://cryo.unixvoid.com/bin/binder/binder-latest-linux-amd64
 ALPINE_FS=https://cryo.unixvoid.com/bin/filesystem/alpine/linux-latest-amd64.rootfs.tar.gz
 REDIS_FS=https://cryo.unixvoid.com/bin/redis/filesystem/rootfs.tar.gz
@@ -51,6 +52,16 @@ build_travis_standalone_aci: prep_standalone_aci
 	rm -rf appc-v0.8.7*
 	@echo "binder.aci built"
 
+test:
+	mkdir -p test/binderdata
+	mkdir -p test/redisdata
+	$(OS_PERMS) rkt run \
+		--net=host \
+		--insecure-options=image \
+        	--volume data,kind=host,source=$(shell pwd)/test/binderdata/ \
+        	--volume redis,kind=host,source=$(shell pwd)/test/redisdata/ \
+        	./binder.aci
 clean:
 	rm -rf binder-layout
 	rm -f binder.aci
+	rm -rf test/

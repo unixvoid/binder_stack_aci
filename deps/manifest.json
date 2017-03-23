@@ -28,6 +28,18 @@
             "protocol": "tcp",
             "port": 8080
         }
+        ],
+	"mountPoints": [
+        {
+            "name": "redis",
+            "path": "/redisbackup/",
+            "readOnly": false
+        },
+        {
+            "name": "data",
+            "path": "/nginx/data/bin/",
+            "readOnly": false
+        }
         ]
     },
     "annotations": [
