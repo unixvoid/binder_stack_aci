@@ -1,0 +1,13 @@
+[Unit]
+Description=binder-stack
+
+[Service]
+ExecStart=/usr/bin/rkt run \
+        --volume data,kind=host,source=/tmp/rktdata \
+        --port=web:9001 \
+        unixvoid.com/redis \
+        unixvoid.com/binder-api --mount volume=data,target=/uploads \
+        unixvoid.com/nginx-binder --mount volume=data,target=/nginx/data/bin
+
+[Install]
+WantedBy=multi-user.target
