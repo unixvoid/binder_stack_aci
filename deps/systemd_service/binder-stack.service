@@ -4,8 +4,9 @@ Description=binder-stack
 [Service]
 ExecStart=/usr/bin/rkt run \
         --volume data,kind=host,source=/tmp/rktdata \
+        --volume redis,kind=host,source=/tmp/redisdata \
         --port=web:9001 \
-        unixvoid.com/redis \
+        unixvoid.com/redis --mount volume=redis,target=/redisbak \
         unixvoid.com/binder-api --mount volume=data,target=/uploads \
         unixvoid.com/nginx-binder --mount volume=data,target=/nginx/data/bin
 
